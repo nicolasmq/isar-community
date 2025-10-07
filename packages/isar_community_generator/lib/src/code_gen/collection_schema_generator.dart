@@ -19,7 +19,7 @@ String generateSchema(ObjectInfo object) {
 
   code += '''
     name: r'${object.isarName}',
-    id: ${object.id},
+    id: BigInt.parse("${object.id}").toInt(),
     properties: {$properties},
 
     estimateSize: ${object.estimateSizeName},
@@ -87,7 +87,7 @@ String _generateIndexSchema(ObjectIndex index) {
 
   return '''
     IndexSchema(
-      id: ${index.id},
+      id: BigInt.parse("${index.id}").toInt(),
       name: r'${index.name}',
       unique: ${index.unique},
       replace: ${index.replace},
@@ -102,7 +102,7 @@ String _generateLinkSchema(ObjectInfo object, ObjectLink link) {
   }
   return '''
     LinkSchema(
-      id: ${link.id(object.isarName)},
+      id: BigInt.parse("${link.id(object.isarName)}").toInt(),
       name: r'${link.isarName}',
       target: r'${link.targetCollectionIsarName}',
       single: ${link.isSingle},
